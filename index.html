@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Icare</title>
+</head>
+<body>
+	<input type="button" name="btn" id="btn" value="button">
+	<div id="res"></div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+
+  $(function () {
+    var socket = io();
+    //Jquery click
+    $('#btn').click(function(){
+    	//On envoie le message au serveur
+    	socket.emit('buttonfromweb','a');
+    });
+    //On ecoute pour savoir si on reçoi 
+    socket.on('sendtoweb', function (data) {
+	    console.log("recive :"+data);
+	    //On change la div #res avec la chaine randome
+	    document.getElementById("res").innerHTML = data;
+	  });
+  });
+</script>
+</html>
